@@ -55,7 +55,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
-                                    <table id="example" class="display expandable-table" style="width:100%">
+                                    <form class="d-flex" action={{ route('admin.guru') }} method="GET" role="search">
+                                        <input name="search" class="form-control me-2" type="search" value="{{ isset($search) ? $search : '' }}" placeholder="Search" aria-label="Search">
+                                        <button class="btn btn-outline-success" type="submit">Search</button>
+                                    </form>
+                                    <table class="display expandable-table" style="width:100%">
                                         <thead>
                                             <tr class="mx-auto">
                                                 <th width="5%" class="text-center">No</th>
@@ -71,7 +75,7 @@
                                             @php
                                                 $no = 1;
                                             @endphp
-                                            @foreach ($guru as $itemGuru)
+                                            @foreach ($data as $itemGuru)
                                                 <tr class="shadow-sm">
                                                     <td class="text-center">{{ $no }}</td>
                                                     <td class="text-center">{{ $itemGuru->nama_guru }}</td>

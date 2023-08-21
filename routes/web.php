@@ -15,6 +15,7 @@ use App\Http\Controllers\ManajemenPrestasi;
 use App\Http\Controllers\PengumumanPage;
 use App\Http\Controllers\PrestasiPage;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Test\TestController;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\ComponentPages;
 
@@ -101,7 +102,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit/{id}/banner', [ManajemenBanner::class, 'edit'])->name('admin.edit.banner');
     Route::post('/update/{id}/banner', [ManajemenBanner::class, 'update'])->name('admin.update.banner');
     Route::get('/destroy/{id}/banner', [ManajemenBanner::class, 'destroy'])->name('admin.delete.banner');
+
+    //test
+    Route::get('test', [TestController::class, 'index'])->name('admin.test');
+
+    //logging
+    // Route::get('/logs',[LogController::class, 'index'])->name('logs.index');
+    Route::get('/logs', 'LogController@index');
 });
+
+    
 
 // view profile user (default)
 Route::middleware('auth')->group(function () {
@@ -109,5 +119,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__ . '/auth.php';

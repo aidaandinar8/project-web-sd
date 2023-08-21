@@ -8,12 +8,21 @@ use Illuminate\Http\Request;
 class ManajemenGuru extends Controller
 {
 
-    public function index()
+    public function index(Request $request )
     {
-        $data = [
-            'guru'=>Guru::all()
+        $data = Guru::query();
+        $search = null;
+        if($request->has('search')) {
+            $guru = $data->where('nama_guru','LIKE', '%' . $request->search . '%'); //searching
+            $search = $request->search;
+        };
+        // $guru = $data->orderBy('nama_guru', 'asc'); //shorting
+        $guru = $data->get();
+        $viewdata = [
+            'data'=> $guru,
+            'search' => $search
         ];
-        return view('admin.pages.kelola-guru.index', $data);
+        return view('admin.pages.kelola-guru.index', $viewdata);
     }
 
     public function create()
